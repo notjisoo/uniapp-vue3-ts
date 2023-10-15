@@ -1,4 +1,3 @@
-<!-- // /src/pages/hot/hot.vue -->
 <script setup lang="ts">
 import { ref } from "vue";
 import { getHotRecommendAPI } from "@/services/hot";
@@ -10,7 +9,7 @@ const activeIndex = ref(0);
 
 // 推荐封面图
 const bannerPicture = ref("");
-const subTypes = ref<subTypeItem[]>([]);
+const subTypes = ref<(subTypeItem & { finish?: boolean })[]>([]);
 // 热门推荐页 标题和url
 const hotMap = [
   { type: "1", title: "特惠推荐", url: "/hot/preference" },
@@ -30,7 +29,11 @@ uni.setNavigationBarTitle({
 
 // 获取热门推荐数据
 const getHotRecommendData = async () => {
-  const res = await getHotRecommendAPI(currUrlMap!.url);
+  const res = await getHotRecommendAPI(currUrlMap!.url, {
+    // 技巧，环境变量，开发环境，修改初始化页面方便测试分页结束
+    page: import.meta.env.DEV ? 30 : 1,
+    pageSize: 10,
+  });
   bannerPicture.value = res.result.bannerPicture;
   subTypes.value = res.result.subTypes;
 };
@@ -39,8 +42,16 @@ const getHotRecommendData = async () => {
 const onScrolltolower = async () => {
   // 获取当前选项
   const currsubTypes = subTypes.value[activeIndex.value];
-  // 当前页码累加
-  (currsubTypes.goodsItems.page as number)++;
+
+  // 分页条件
+  if (currsubTypes.goodsItems.page < currsubTypes.goodsItems.pages) {
+    // 当前页码累加
+    (currsubTypes.goodsItems.page as number)++;
+  } else {
+    currsubTypes.finish = true;
+    // 标记已经结束
+    return uni.showToast({ icon: "none", title: "没有更多数据啦" });
+  }
 
   // 调用API传参
   const res = await getHotRecommendAPI(currUrlMap!.url, {
@@ -51,6 +62,7 @@ const onScrolltolower = async () => {
 
   // 新的列表选项
   const newsubTypes = res.result.subTypes[activeIndex.value];
+
   // 数组追加
   currsubTypes.goodsItems.items.push(...newsubTypes.goodsItems.items);
 };
@@ -104,7 +116,9 @@ onLoad(() => {
         </navigator>
       </view>
 
-      <view class="loading-text">正在加载...</view>
+      <view class="loading-text">{{
+        item.finish ? "没有更多数据啦" : "正在加载..."
+      }}</view>
     </scroll-view>
   </view>
 </template>
