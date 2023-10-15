@@ -3,17 +3,29 @@ import { getHomeBannerAPI } from "@/services/home";
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import type { BannerItem } from "@/types/home";
+import { getCategoryTopAPI } from "@/services/category";
+import type { CategoryTopItem } from "@/types/category";
+
 // 存储轮播图数据
 const BannerList = ref<BannerItem[]>([]);
-
 // 获取轮播图的数据
 const getBannerData = async () => {
   const res = await getHomeBannerAPI(2);
   BannerList.value = res.result;
 };
 
+// 存储一级分类的数据
+const categoryList = ref<CategoryTopItem[]>([]);
+const activeIndex = ref<number>(0);
+// 获取一级分类列表的数据
+const getCategoryTopData = async () => {
+  const res = await getCategoryTopAPI();
+  categoryList.value = res.result;
+};
+
 onLoad(() => {
   getBannerData();
+  getCategoryTopData();
 });
 </script>
 
@@ -31,12 +43,13 @@ onLoad(() => {
       <!-- 左侧：一级分类 -->
       <scroll-view class="primary" scroll-y>
         <view
-          v-for="(item, index) in 10"
-          :key="item"
+          v-for="(item, index) in categoryList"
+          :key="item.id"
           class="item"
-          :class="{ active: index === 0 }"
+          :class="{ active: index === activeIndex }"
+          @tap="activeIndex = index"
         >
-          <text class="name"> 居家 </text>
+          {{ item.name }}
         </view>
       </scroll-view>
 
