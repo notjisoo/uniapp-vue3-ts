@@ -3,7 +3,7 @@
  */
 export type PageResult<T> = {
   // 列表数据
-  items: T[] | [];
+  items: T[];
   // 总条数
   counts: number | string;
   // 当前页数
