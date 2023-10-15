@@ -10,6 +10,7 @@ import type { BannerItem, CategoryItem, HotPaneItem } from "@/types/home";
 import CustomNavbar from "./components/CustomNavbar.vue";
 import CategoryPanel from "./components/CategoryPanel.vue";
 import HotPanel from "./components/HotPanel.vue";
+import type { XtxGuessInstance } from "@/types/component";
 // 存储数据bannerList, 如果你不给空数组指定类型那么就是never，以后只能是空数组
 const bannerList = ref<BannerItem[]>([]);
 
@@ -43,13 +44,21 @@ onLoad(() => {
   getHomeCategoryData();
   getHoemHotData();
 });
+
+// 获取猜你喜欢组件实例
+const guessRef = ref<XtxGuessInstance>();
+
+// 滚动触底会自动触发
+const onScrolltolower = () => {
+  guessRef.value?.getMore();
+};
 </script>
 
 <template>
   <!-- 自动导入，在pages.json -->
   <CustomNavbar />
 
-  <scroll-view scroll-y class="scroll-view">
+  <scroll-view scroll-y class="scroll-view" @scrolltolower="onScrolltolower">
     <!-- 自定义轮播图 -->
     <XtxSwiper :list="bannerList" />
 
@@ -60,7 +69,7 @@ onLoad(() => {
     <HotPanel :list="HotPanelList" />
 
     <!-- 猜你喜欢的组件 -->
-    <XtxGuess />
+    <XtxGuess ref="guessRef" />
   </scroll-view>
 </template>
 

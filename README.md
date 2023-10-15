@@ -33,11 +33,15 @@
 1. 安装依赖
 
 ```shell
+
 # npm
+
 npm i --registry=https://registry.npmmirror.com
 
 # pnpm
+
 pnpm i --registry=https://registry.npmmirror.com
+
 ```
 
 2. 运行程序

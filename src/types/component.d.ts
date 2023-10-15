@@ -13,3 +13,8 @@ declare module "@vue/runtime-core" {
     XtxGuess: typeof XtxGuess;
   }
 }
+
+// 组件实例类型
+// typeof XtxGuess 获取组件的类型
+// InstanceType<typeof XtxGuess> 获取组件的实例类型
+export type XtxGuessInstance = InstanceType<typeof XtxGuess>;
