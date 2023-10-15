@@ -11,6 +11,10 @@ import CustomNavbar from "./components/CustomNavbar.vue";
 import CategoryPanel from "./components/CategoryPanel.vue";
 import HotPanel from "./components/HotPanel.vue";
 import type { XtxGuessInstance } from "@/types/component";
+import PageSkeleton from "./components/PageSkeleton.vue";
+// 请求数据是否在加载中
+const isLoading = ref<boolean>(false);
+
 // 存储数据bannerList, 如果你不给空数组指定类型那么就是never，以后只能是空数组
 const bannerList = ref<BannerItem[]>([]);
 
@@ -42,10 +46,14 @@ const getHoemHotData = async () => {
 };
 
 // 页面加载的时候就需要调用获取信息
-onLoad(() => {
-  getHomeBanerData();
-  getHomeCategoryData();
-  getHoemHotData();
+onLoad(async () => {
+  isLoading.value = true;
+  await Promise.all([
+    getHomeBanerData(),
+    getHomeCategoryData(),
+    getHoemHotData(),
+  ]);
+  isLoading.value = false;
 });
 
 // 获取猜你喜欢组件实例
@@ -87,17 +95,22 @@ const onRefresherrefresh = async () => {
     class="scroll-view"
     @scrolltolower="onScrolltolower"
   >
-    <!-- 自定义轮播图 -->
-    <XtxSwiper :list="bannerList" />
+    <!-- 骨架屏 -->
+    <PageSkeleton v-if="isLoading" />
 
-    <!-- 分类面板 -->
-    <CategoryPanel :list="categoryList" />
+    <template v-else>
+      <!-- 自定义轮播图 -->
+      <XtxSwiper :list="bannerList" />
 
-    <!-- 热门推荐 -->
-    <HotPanel :list="HotPanelList" />
+      <!-- 分类面板 -->
+      <CategoryPanel :list="categoryList" />
 
-    <!-- 猜你喜欢的组件 -->
-    <XtxGuess ref="guessRef" />
+      <!-- 热门推荐 -->
+      <HotPanel :list="HotPanelList" />
+
+      <!-- 猜你喜欢的组件 -->
+      <XtxGuess ref="guessRef" />
+    </template>
   </scroll-view>
 </template>
 
