@@ -20,6 +20,9 @@ const categoryList = ref<CategoryItem[]>([]);
 // 热门推荐的数据
 const HotPanelList = ref<HotPaneItem[]>([]);
 
+// 设置下拉刷新的状态是否关闭显示
+const isTriggered = ref<boolean>(false);
+
 // 获取首页轮播图数据
 const getHomeBanerData = async () => {
   const res = await getHomeBannerAPI();
@@ -52,13 +55,36 @@ const guessRef = ref<XtxGuessInstance>();
 const onScrolltolower = () => {
   guessRef.value?.getMore();
 };
+
+// 下拉刷新触发函数
+const onRefresherrefresh = async () => {
+  isTriggered.value = true;
+  // await getHomeBanerData();
+  // await getHomeCategoryData();
+  // await getHoemHotData();
+  // 只需要等一次利用,Promise.all  三个同时开始
+  await Promise.all([
+    getHomeBanerData(),
+    getHomeCategoryData(),
+    getHoemHotData(),
+  ]);
+  // 等待他们成功再关闭
+  isTriggered.value = false;
+};
 </script>
 
 <template>
   <!-- 自动导入，在pages.json -->
   <CustomNavbar />
 
-  <scroll-view scroll-y class="scroll-view" @scrolltolower="onScrolltolower">
+  <scroll-view
+    :refresher-enabled="true"
+    @refresherrefresh="onRefresherrefresh"
+    :refresher-triggered="isTriggered"
+    scroll-y
+    class="scroll-view"
+    @scrolltolower="onScrolltolower"
+  >
     <!-- 自定义轮播图 -->
     <XtxSwiper :list="bannerList" />
 
