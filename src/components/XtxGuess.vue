@@ -13,7 +13,7 @@ const finish = ref(false);
 
 // 分页参数 利用 required 这个ts工具函数 将你定义的时候是可选的转化为必选
 const pageParams: Required<PageParams> = {
-  page: 30,
+  page: 1,
   pageSize: 10,
 };
 
@@ -31,6 +31,13 @@ const getHomeGoodsGuessLikeData = async () => {
   }
 };
 
+// 重置数据
+const resetData = () => {
+  pageParams.page = 1;
+  GoodsGuess.value = [];
+  finish.value = false;
+};
+
 // 组件挂载完毕
 onMounted(() => {
   getHomeGoodsGuessLikeData();
@@ -38,6 +45,7 @@ onMounted(() => {
 
 // 暴露方法
 defineExpose({
+  resetData,
   getMore: getHomeGoodsGuessLikeData,
 });
 </script>

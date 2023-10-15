@@ -63,10 +63,12 @@ const onRefresherrefresh = async () => {
   // await getHomeCategoryData();
   // await getHoemHotData();
   // 只需要等一次利用,Promise.all  三个同时开始
+  guessRef.value?.resetData();
   await Promise.all([
     getHomeBanerData(),
     getHomeCategoryData(),
     getHoemHotData(),
+    guessRef.value?.getMore(),
   ]);
   // 等待他们成功再关闭
   isTriggered.value = false;
