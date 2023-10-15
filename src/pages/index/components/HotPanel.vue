@@ -11,7 +11,11 @@ defineProps<{ list: HotPaneItem[] }>();
         <text class="title-text">{{ item.title }}</text>
         <text class="title-desc">{{ item.alt }}</text>
       </view>
-      <navigator hover-class="none" url="/pages/hot/hot" class="cards">
+      <navigator
+        hover-class="none"
+        :url="`/pages/hot/hot?type=${item.type}`"
+        class="cards"
+      >
         <image
           v-for="pic in item.pictures"
           class="image"
