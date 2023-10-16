@@ -12,10 +12,25 @@ const query = defineProps<{ id: string }>();
 
 // 获取商品详情信息
 const goods = ref<GoodsResult>();
-
 const getGoodsData = async (id: string) => {
   const res = await getGoodsAPI(id);
   goods.value = res.result;
+};
+
+// 记录轮播图的当前value
+const currentSwiperVal = ref<number>(0);
+// 轮播图change函数
+const Onchange: UniHelper.SwiperOnChange = (e) => {
+  currentSwiperVal.value = e.detail!.current;
+};
+
+// 点击轮播图图片的函数，点击之后会放大
+const onTapImage = (url: string) => {
+  // 点击图片大图预览
+  uni.previewImage({
+    current: url,
+    urls: goods.value!.mainPictures,
+  });
 };
 
 onLoad(() => {
@@ -29,16 +44,16 @@ onLoad(() => {
     <view class="goods">
       <!-- 商品主图 -->
       <view class="preview">
-        <swiper circular>
+        <swiper circular autoplay @change="Onchange">
           <swiper-item
             v-for="(item, index) in goods?.mainPictures"
             :key="index"
           >
-            <image mode="aspectFill" :src="item" />
+            <image @tap="onTapImage(item)" mode="aspectFill" :src="item" />
           </swiper-item>
         </swiper>
         <view class="indicator">
-          <text class="current">1</text>
+          <text class="current">{{ currentSwiperVal + 1 }}</text>
           <text class="split">/</text>
           <text class="total">{{ goods?.mainPictures.length }}</text>
         </view>
