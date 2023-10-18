@@ -10,8 +10,8 @@ import type { BannerItem, CategoryItem, HotPaneItem } from "@/types/home";
 import CustomNavbar from "./components/CustomNavbar.vue";
 import CategoryPanel from "./components/CategoryPanel.vue";
 import HotPanel from "./components/HotPanel.vue";
-import type { XtxGuessInstance } from "@/types/component";
 import PageSkeleton from "./components/PageSkeleton.vue";
+import { useGuessList } from "@/composables";
 // 请求数据是否在加载中
 const isLoading = ref<boolean>(false);
 
@@ -56,13 +56,8 @@ onLoad(async () => {
   isLoading.value = false;
 });
 
-// 获取猜你喜欢组件实例
-const guessRef = ref<XtxGuessInstance>();
-
-// 滚动触底会自动触发
-const onScrolltolower = () => {
-  guessRef.value?.getMore();
-};
+// 调用useGuessList
+const { guessRef, onScrolltolower } = useGuessList();
 
 // 下拉刷新触发函数
 const onRefresherrefresh = async () => {
