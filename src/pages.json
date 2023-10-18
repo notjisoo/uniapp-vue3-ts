@@ -97,7 +97,7 @@
 	// 分包加载规则。
 	"subPackages": [
 		{
-			"root": "pagesMember",
+			"root": "pagesMember", // 会员单独的模块的分包，如果到时候遇到了商品或者购物车其他模块也可以在后面+个数组
 			"pages": [
 				{
 					"path": "settings/settings",
@@ -112,7 +112,7 @@
 	// 分包预下载
 	"preloadRule":{
 		"pages/my/my": {
-			"network": "all",
+			"network": "all", // 不管是Wi-Fi，还是普通network
 			"packages": ["pagesMember"]
 		}
 	}
