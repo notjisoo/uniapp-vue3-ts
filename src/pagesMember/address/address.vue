@@ -12,7 +12,7 @@ const getMemberAddressData = async () => {
 };
 
 // 初始化调用
-// 这要用onShow，不可以使用onMounted或者是onLoad
+// 这要用onShow，不可以使用onMounted或者是onLoad,每当页面展示的时候就调用
 onShow(() => {
   console.log("obj");
 
