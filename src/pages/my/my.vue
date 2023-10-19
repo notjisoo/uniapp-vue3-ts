@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useGuessList } from "@/composables";
 import { useMemberStore } from "@/stores";
-import type { XtxGuessInstance } from "@/types/component";
-import { ref } from "vue";
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync();
@@ -39,7 +37,7 @@ const { guessRef, onScrolltolower } = useGuessList(); // 组合式API
         </navigator>
         <view class="meta">
           <view class="nickname">
-            {{ memberStore.profile.nickname || memberStore.profile.accout }}
+            {{ memberStore.profile.nickname || memberStore.profile.account }}
           </view>
           <navigator
             class="extra"

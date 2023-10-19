@@ -104,16 +104,37 @@
 					"style": {
 						"navigationBarTitleText": "设置"
 					}
+				},
+				{
+					"path": "profile/profile",
+					"style": {
+						"navigationBarTitleText": "个人信息页",
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "white"
+					}
+				},
+				{
+					"path": "address/address",
+					"style": {
+						"navigationBarTitleText": "地址管理"
+					}
+				},
+				{
+					"path": "address-form/address-form",
+					"style": {
+						"navigationBarTitleText": ""
+					}
 				}
 			]
 		}
 	],
-
 	// 分包预下载
-	"preloadRule":{
+	"preloadRule": {
 		"pages/my/my": {
 			"network": "all", // 不管是Wi-Fi，还是普通network
-			"packages": ["pagesMember"]
+			"packages": [
+				"pagesMember"
+			]
 		}
 	}
 }
