@@ -52,6 +52,7 @@ const onTapImage = (url: string) => {
 
 onLoad(() => {
   getGoodsData(query.id);
+  console.log('');
 });
 </script>
 
