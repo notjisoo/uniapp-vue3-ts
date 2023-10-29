@@ -1,6 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const services_goods = require("../../services/goods.js");
+const services_cart = require("../../services/cart.js");
 require("../../utils/http.js");
 require("../../stores/index.js");
 require("../../stores/modules/member.js");
@@ -75,44 +76,80 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       console.log("");
     });
     const isShowSku = common_vendor.ref(false);
+    const mode = common_vendor.ref(
+      3
+      /* Buy */
+    );
+    const openSkuPopup = (val) => {
+      isShowSku.value = true;
+      mode.value = val;
+    };
+    const skuPopupRef = common_vendor.ref();
+    const selectArrText = common_vendor.computed(() => {
+      var _a, _b;
+      return ((_b = (_a = skuPopupRef.value) == null ? void 0 : _a.selectArr) == null ? void 0 : _b.join(" ").trim()) || "请选择商品规格";
+    });
+    const onAddCart = async (e) => {
+      await services_cart.postMemberCartAPI({ skuId: e._id, count: e.buy_num });
+      common_vendor.index.showToast({
+        title: "添加成功"
+      });
+      isShowSku.value = false;
+    };
     return (_ctx, _cache) => {
       var _a, _b, _c, _d, _e, _f, _g, _h, _i;
       return common_vendor.e({
-        a: common_vendor.o(($event) => isShowSku.value = $event),
-        b: common_vendor.p({
+        a: common_vendor.sr(skuPopupRef, "b064ec2c-0", {
+          "k": "skuPopupRef"
+        }),
+        b: common_vendor.o(onAddCart),
+        c: common_vendor.o(($event) => isShowSku.value = $event),
+        d: common_vendor.p({
+          ["buy-now-background-color"]: "#22b190",
+          ["add-cart-background-color"]: "#ff9e5d",
           localdata: localdata.value,
+          mode: mode.value,
+          ["actived-style"]: {
+            color: "#27BA9B",
+            borderColor: "#27BA9B",
+            backgroundColor: "#E9F8F5"
+          },
           modelValue: isShowSku.value
         }),
-        c: common_vendor.f((_a = goods.value) == null ? void 0 : _a.mainPictures, (item, index, i0) => {
+        e: common_vendor.f((_a = goods.value) == null ? void 0 : _a.mainPictures, (item, index, i0) => {
           return {
             a: common_vendor.o(($event) => onTapImage(item), index),
             b: item,
             c: index
           };
         }),
-        d: common_vendor.o(Onchange),
-        e: common_vendor.t(currentSwiperVal.value + 1),
-        f: common_vendor.t((_b = goods.value) == null ? void 0 : _b.mainPictures.length),
-        g: common_vendor.t((_c = goods.value) == null ? void 0 : _c.price),
-        h: common_vendor.t((_d = goods.value) == null ? void 0 : _d.name),
-        i: common_vendor.t((_e = goods.value) == null ? void 0 : _e.desc),
-        j: common_vendor.o(($event) => isShowSku.value = true),
-        k: common_vendor.o(($event) => openPopup("address")),
-        l: common_vendor.o(($event) => openPopup("service")),
-        m: common_vendor.f((_f = goods.value) == null ? void 0 : _f.details.properties, (item, k0, i0) => {
+        f: common_vendor.o(Onchange),
+        g: common_vendor.t(currentSwiperVal.value + 1),
+        h: common_vendor.t((_b = goods.value) == null ? void 0 : _b.mainPictures.length),
+        i: common_vendor.t((_c = goods.value) == null ? void 0 : _c.price),
+        j: common_vendor.t((_d = goods.value) == null ? void 0 : _d.name),
+        k: common_vendor.t((_e = goods.value) == null ? void 0 : _e.desc),
+        l: common_vendor.t(common_vendor.unref(selectArrText)),
+        m: common_vendor.o(($event) => openSkuPopup(
+          1
+          /* Both */
+        )),
+        n: common_vendor.o(($event) => openPopup("address")),
+        o: common_vendor.o(($event) => openPopup("service")),
+        p: common_vendor.f((_f = goods.value) == null ? void 0 : _f.details.properties, (item, k0, i0) => {
           return {
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.value),
             c: item.name
           };
         }),
-        n: common_vendor.f((_g = goods.value) == null ? void 0 : _g.details.pictures, (item, k0, i0) => {
+        q: common_vendor.f((_g = goods.value) == null ? void 0 : _g.details.pictures, (item, k0, i0) => {
           return {
             a: item,
             b: item
           };
         }),
-        o: common_vendor.f((_h = goods.value) == null ? void 0 : _h.similarProducts, (item, k0, i0) => {
+        r: common_vendor.f((_h = goods.value) == null ? void 0 : _h.similarProducts, (item, k0, i0) => {
           return {
             a: item.picture,
             b: common_vendor.t(item.name),
@@ -121,25 +158,33 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             e: `/pages/goods/goods?id=${item.id}`
           };
         }),
-        p: ((_i = common_vendor.unref(safeAreaInsets)) == null ? void 0 : _i.bottom) + "px",
-        q: popupName.value === "address"
+        s: common_vendor.o(($event) => openSkuPopup(
+          2
+          /* Cart */
+        )),
+        t: common_vendor.o(($event) => openSkuPopup(
+          3
+          /* Buy */
+        )),
+        v: ((_i = common_vendor.unref(safeAreaInsets)) == null ? void 0 : _i.bottom) + "px",
+        w: popupName.value === "address"
       }, popupName.value === "address" ? {
-        r: common_vendor.o(($event) => {
+        x: common_vendor.o(($event) => {
           var _a2;
           return (_a2 = popup.value) == null ? void 0 : _a2.close();
         })
       } : {}, {
-        s: popupName.value === "service"
+        y: popupName.value === "service"
       }, popupName.value === "service" ? {
-        t: common_vendor.o(($event) => {
+        z: common_vendor.o(($event) => {
           var _a2;
           return (_a2 = popup.value) == null ? void 0 : _a2.close();
         })
       } : {}, {
-        v: common_vendor.sr(popup, "b064ec2c-1", {
+        A: common_vendor.sr(popup, "b064ec2c-1", {
           "k": "popup"
         }),
-        w: common_vendor.p({
+        B: common_vendor.p({
           type: "bottom",
           ["background-color"]: "\n  #fff"
         })

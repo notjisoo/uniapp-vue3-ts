@@ -1,1 +1,1 @@
-<view class="app data-v-fb6ea9e5"><button class="data-v-fb6ea9e5" bindtap="{{a}}">打开SKU组件啊</button><vk-data-goods-sku-popup wx:if="{{h}}" class="r data-v-fb6ea9e5" u-r="skuPopup" bindopen="{{c}}" bindclose="{{d}}" bindaddCart="{{e}}" bindbuyNow="{{f}}" u-i="fb6ea9e5-0" bind:__l="__l" bindupdateModelValue="{{g}}" u-p="{{h}}"></vk-data-goods-sku-popup></view>
+<cart-main u-i="567d5908-0" bind:__l="__l"/>

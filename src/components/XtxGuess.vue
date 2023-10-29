@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import { getHomeGoodsGuessLikeAPI } from "@/services/home";
 import { onMounted } from "vue";
 import type { GuessItem } from "@/types/home";
-import type { PageParams, PageResult } from "@/types/global";
+import type { PageParams } from "@/types/global";
 
 // 猜你喜欢的数据
 const GoodsGuess = ref<GuessItem[]>([]);
@@ -24,6 +24,7 @@ const getHomeGoodsGuessLikeData = async () => {
     return uni.showToast({ icon: "none", title: "没有更多数据啦" });
   }
   const res = await getHomeGoodsGuessLikeAPI(pageParams);
+
   GoodsGuess.value.push(...res.result.items);
   if (pageParams.page < (res.result.pages as number)) pageParams.page++;
   else {

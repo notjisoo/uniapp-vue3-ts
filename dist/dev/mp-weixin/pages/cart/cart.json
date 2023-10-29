@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "购物车",
   "usingComponents": {
-    "vk-data-goods-sku-popup": "../../components/vk-data-goods-sku-popup/vk-data-goods-sku-popup"
+    "cart-main": "./components/CartMain"
   }
 }

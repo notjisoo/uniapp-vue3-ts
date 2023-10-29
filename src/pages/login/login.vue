@@ -29,7 +29,8 @@ const onGetphonenumberSimple = async () => {
   memberStore.setProfile(res.result);
 
   // 页面跳转
-  uni.switchTab({ url: "/pages/my/my" });
+  // uni.switchTab({ url: "/pages/my/my" });
+  uni.navigateBack();
   uni.showToast({
     icon: "success",
     title: "登录成功",

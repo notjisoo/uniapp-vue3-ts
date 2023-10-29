@@ -76,6 +76,7 @@ const { guessRef, onScrolltolower } = useGuessList(); // 组合式API
         url="/pagesMember/settings/settings"
         hover-class="none"
       >
+        设置
       </navigator>
     </view>
 
@@ -91,6 +92,7 @@ const { guessRef, onScrolltolower } = useGuessList(); // 组合式API
           查看全部订单<text class="icon-right"></text>
         </navigator>
       </view>
+
       <view class="section">
         <!-- 订单 -->
         <navigator

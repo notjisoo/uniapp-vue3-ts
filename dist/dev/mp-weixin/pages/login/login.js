@@ -25,7 +25,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       const res = await services_login.postLoginWxMinSimpleAPI("13123456789");
       const memberStore = stores_modules_member.useMemberStore();
       memberStore.setProfile(res.result);
-      common_vendor.index.switchTab({ url: "/pages/my/my" });
+      common_vendor.index.navigateBack();
       common_vendor.index.showToast({
         icon: "success",
         title: "登录成功"
