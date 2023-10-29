@@ -366,6 +366,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     l: common_vendor.n($options.isDesktop ? "fixforpc-z-index" : "")
   }) : {});
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lijiahui/Desktop/uniapp-v3+Ts-shop/node_modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/ljh/Desktop/uniapp-v3+Ts-shop/node_modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue"]]);
 wx.createComponent(Component);
 //# sourceMappingURL=uni-popup.js.map

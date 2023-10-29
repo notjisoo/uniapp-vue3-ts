@@ -152,7 +152,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }),
         o: common_vendor.o(onSwitchChange),
         p: form.value.isDefault === 1,
-        q: common_vendor.sr(formRef, "24b6ccba-0", {
+        q: common_vendor.sr(formRef, "40566bd6-0", {
           "k": "formRef"
         }),
         r: common_vendor.p({
@@ -165,6 +165,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lijiahui/Desktop/uniapp-v3+Ts-shop/src/pagesMember/address-form/address-form.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/ljh/Desktop/uniapp-v3+Ts-shop/src/pagesMember/address-form/address-form.vue"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=address-form.js.map

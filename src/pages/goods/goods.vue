@@ -6,9 +6,13 @@ import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import AddressPanel from "./components/AddressPanel.vue";
 import ServicePanel from "./components/ServicePanel.vue";
+import type { SkuPopupLocaldata } from "@/components/vk-data-goods-sku-popup/vk-data-goods-sku-popup";
 
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync();
+
+// 商品信息
+const localdata = ref({} as SkuPopupLocaldata);
 
 // uni-ui 弹出层组件 ref
 const popup = ref<{
@@ -32,6 +36,29 @@ const goods = ref<GoodsResult>();
 const getGoodsData = async (id: string) => {
   const res = await getGoodsAPI(id);
   goods.value = res.result;
+  // sku组件所需格式
+  localdata.value = {
+    _id: res.result.id,
+    name: res.result.name,
+    goods_thumb: res.result.mainPictures[0],
+    spec_list: res.result.specs.map((v) => {
+      return {
+        name: v.name,
+        list: v.values
+      }
+    }),
+    sku_list: res.result.skus.map((v) => {
+      return {
+        _id: v.id,
+        goods_id: res.result.id,
+        goods_name: res.result.name,
+        image: v.picture,
+        price: v.price * 100, // 注意：这里需要 乘以 100价格才会正常
+        stock: v.inventory,
+        sku_name_arr: v.specs.map((vv) => vv.valueName)
+      }
+    })
+  }
 };
 
 // 记录轮播图的当前value
@@ -54,9 +81,16 @@ onLoad(() => {
   getGoodsData(query.id);
   console.log('');
 });
+
+// 是否显示SKU组件
+const isShowSku = ref(false);
+
 </script>
 
 <template>
+  <!-- sku弹窗组件 -->
+  <vk-data-goods-sku-popup v-model="isShowSku" :localdata="localdata" />
+
   <scroll-view scroll-y class="viewport">
     <!-- 基本信息 -->
     <view class="goods">
@@ -89,7 +123,7 @@ onLoad(() => {
 
       <!-- 操作面板 -->
       <view class="action">
-        <view class="item arrow">
+        <view @tap="isShowSku = true" class="item arrow">
           <text class="label">选择</text>
           <text class="text ellipsis"> 请选择商品规格 </text>
         </view>

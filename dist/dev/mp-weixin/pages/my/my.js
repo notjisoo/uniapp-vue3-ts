@@ -39,7 +39,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             d: `/pagesOrder/list/list?type=${item.type}`
           };
         }),
-        f: common_vendor.sr(guessRef, "1c482649-0", {
+        f: common_vendor.sr(guessRef, "7656d23c-0", {
           "k": "guessRef"
         }),
         g: common_vendor.o(
@@ -50,6 +50,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lijiahui/Desktop/uniapp-v3+Ts-shop/src/pages/my/my.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/ljh/Desktop/uniapp-v3+Ts-shop/src/pages/my/my.vue"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=my.js.map

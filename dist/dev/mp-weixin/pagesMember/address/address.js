@@ -55,13 +55,13 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             f: `/pagesMember/address-form/address-form?id=${item.id}`,
             g: common_vendor.o(($event) => onDeleteAddress(item.id), item.id),
             h: item.id,
-            i: "ee4c68a6-1-" + i0 + ",ee4c68a6-0"
+            i: "0f7031a0-1-" + i0 + ",0f7031a0-0"
           });
         })
       } : {});
     };
   }
 });
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lijiahui/Desktop/uniapp-v3+Ts-shop/src/pagesMember/address/address.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/ljh/Desktop/uniapp-v3+Ts-shop/src/pagesMember/address/address.vue"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=address.js.map

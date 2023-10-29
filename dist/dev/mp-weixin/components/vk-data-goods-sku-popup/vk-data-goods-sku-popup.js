@@ -1043,6 +1043,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     U: common_vendor.o((...args) => $options.stop && $options.stop(...args))
   });
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-d1e15e37"], ["__file", "/Users/lijiahui/Desktop/uniapp-v3+Ts-shop/src/components/vk-data-goods-sku-popup/vk-data-goods-sku-popup.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-d1e15e37"], ["__file", "/Users/ljh/Desktop/uniapp-v3+Ts-shop/src/components/vk-data-goods-sku-popup/vk-data-goods-sku-popup.vue"]]);
 wx.createComponent(Component);
 //# sourceMappingURL=vk-data-goods-sku-popup.js.map

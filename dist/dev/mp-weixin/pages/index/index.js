@@ -74,7 +74,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         d: common_vendor.p({
           list: HotPanelList.value
         }),
-        e: common_vendor.sr(guessRef, "e17f8ba2-5", {
+        e: common_vendor.sr(guessRef, "b226383c-5", {
           "k": "guessRef"
         })
       }, {
@@ -88,6 +88,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
   }
 });
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/lijiahui/Desktop/uniapp-v3+Ts-shop/src/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "/Users/ljh/Desktop/uniapp-v3+Ts-shop/src/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=index.js.map

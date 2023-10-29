@@ -348,6 +348,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     E: common_vendor.o((...args) => $options.clearTimer && $options.clearTimer(...args))
   };
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-3517706a"], ["__file", "/Users/lijiahui/Desktop/uniapp-v3+Ts-shop/src/components/vk-data-input-number-box/vk-data-input-number-box.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-3517706a"], ["__file", "/Users/ljh/Desktop/uniapp-v3+Ts-shop/src/components/vk-data-input-number-box/vk-data-input-number-box.vue"]]);
 wx.createComponent(Component);
 //# sourceMappingURL=vk-data-input-number-box.js.map

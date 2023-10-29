@@ -141,6 +141,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-fb6ea9e5"], ["__file", "/Users/lijiahui/Desktop/uniapp-v3+Ts-shop/src/pages/cart/cart.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-fb6ea9e5"], ["__file", "/Users/ljh/Desktop/uniapp-v3+Ts-shop/src/pages/cart/cart.vue"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=cart.js.map
