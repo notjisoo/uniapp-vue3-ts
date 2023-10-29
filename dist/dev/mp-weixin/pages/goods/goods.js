@@ -72,6 +72,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
     common_vendor.onLoad(() => {
       getGoodsData(query.id);
+      console.log("");
     });
     const isShowSku = common_vendor.ref(false);
     return (_ctx, _cache) => {

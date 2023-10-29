@@ -1,19 +1,7 @@
-<<<<<<< HEAD
-<script setup lang="ts">
-//
-</script>
-
-<template>
-  <view class="cart">cart</view>
-</template>
-
-<style lang="scss">
-//
-=======
 <!-- 静态数据演示版本 适合任何后端 -->
 <template>
   <view class="app">
-    <button @click="openSkuPopup()">打开SKU组件</button>
+    <button @click="openSkuPopup()">打开SKU组件啊</button>
 
     <vk-data-goods-sku-popup
       ref="skuPopup"
@@ -163,5 +151,4 @@ export default {
   padding: 30rpx;
   font-size: 28rpx;
 }
->>>>>>> 3341989 (first sku add)
 </style>

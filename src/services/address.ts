@@ -26,8 +26,6 @@ export const getMemberAddressAPI = () => {
     url: "/member/address",
   });
 };
-<<<<<<< HEAD
-=======
 
 /**
  * 收货地址详情
@@ -68,4 +66,3 @@ export const deleteMemberAddressByIdAPI = (id: string) => {
     url: `/member/address/${id}`,
   });
 };
->>>>>>> 3341989 (first sku add)
