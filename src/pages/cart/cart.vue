@@ -1,7 +1,7 @@
 <!-- 静态数据演示版本 适合任何后端 -->
 <template>
   <view class="app">
-    <button @click="openSkuPopup()">打开SKU组件啊</button>
+    <button @click="openSkuPopup()">打开SKU组件</button>
 
     <vk-data-goods-sku-popup
       ref="skuPopup"
