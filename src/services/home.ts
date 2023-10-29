@@ -43,8 +43,14 @@ export const getHomeHotAPI = () => {
 
 /**
  * 猜你喜欢-小程序
+<<<<<<< HEAD
  * GET
  * /home/goods/guessLike
+=======
+ * GET  /home/goods/guessLike
+ * @param data 猜你喜欢传递的参数
+ * @returns
+>>>>>>> 3341989 (first sku add)
  */
 
 export const getHomeGoodsGuessLikeAPI = (data?: PageParams) => {

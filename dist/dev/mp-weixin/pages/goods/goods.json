@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "usingComponents": {
+    "uni-popup": "../../node-modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup",
+    "address-panel": "./components/AddressPanel",
+    "service-panel": "./components/ServicePanel"
+  }
+}

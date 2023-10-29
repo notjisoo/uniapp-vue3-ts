@@ -1,8 +1,74 @@
 <script setup lang="ts">
+<<<<<<< HEAD
 import { postMemberAdressAPI } from "@/services/address";
 
 import { ref } from "vue";
 
+=======
+import {
+  getMemberAddressByIdAPI,
+  postMemberAdressAPI,
+  putMemberAddressByIdAPI,
+} from "@/services/address";
+import { onLoad } from "@dcloudio/uni-app";
+
+import { ref } from "vue";
+
+// 存储表单实例
+const formRef = ref<UniHelper.UniFormsInstance>();
+// 定义校验规则
+const rules = {
+  // 收货人
+  receiver: {
+    rules: [
+      {
+        required: true,
+        errorMessage: "请输入姓名",
+      },
+      {
+        minLength: 3,
+        maxLength: 10,
+        errorMessage: "请输入合适的长度",
+      },
+    ],
+  },
+
+  // 手机号码
+  contact: {
+    rules: [
+      {
+        required: true,
+        errorMessage: "请输入联系方式",
+      },
+      {
+        pattern: /^1[3-9]\d{9}$/,
+        errorMessage: "手机号格式不正确",
+      },
+    ],
+  },
+
+  // 所在地区
+  fullLocation: {
+    rules: [
+      {
+        required: true,
+        errorMessage: "请选择所在地区",
+      },
+    ],
+  },
+
+  // 详细地址
+  address: {
+    rules: [
+      {
+        required: true,
+        errorMessage: "请选择详细地址",
+      },
+    ],
+  },
+};
+
+>>>>>>> 3341989 (first sku add)
 // 表单数据
 const form = ref({
   receiver: "", // 收货人
@@ -42,6 +108,7 @@ const onSwitchChange: UniHelper.SwitchOnChange = (e) => {
 
 // 提交表单
 const onSubmit = async () => {
+<<<<<<< HEAD
   await postMemberAdressAPI(form.value);
   uni.showToast({
     icon: "success",
@@ -52,29 +119,80 @@ const onSubmit = async () => {
     uni.navigateBack();
   }, 400);
 };
+=======
+  try {
+    await formRef.value?.validate?.();
+    if (query.id) await putMemberAddressByIdAPI(query.id, form.value);
+    else await postMemberAdressAPI(form.value);
+
+    uni.showToast({
+      icon: "success",
+      title: query.id ? "修改地址成功!" : "添加地址成功!",
+    });
+
+    setTimeout(() => {
+      uni.navigateBack();
+    }, 400);
+  } catch (error) {
+    uni.showToast({ icon: "error", title: "请填写完整信息" });
+  }
+};
+
+// 获取收货地址详情数据
+const getMemberAddressByIdData = async () => {
+  if (query.id) {
+    const res = await getMemberAddressByIdAPI(query.id);
+    // 将数据合并到form.value中
+    Object.assign(form.value, res.result);
+  }
+};
+
+// 页面加载时
+onLoad(() => {
+  getMemberAddressByIdData();
+});
+>>>>>>> 3341989 (first sku add)
 </script>
 
 <template>
   <view class="content">
+<<<<<<< HEAD
     <form>
       <!-- 表单内容 -->
       <view class="form-item">
+=======
+    <uni-forms :rules="rules" :model="form" ref="formRef">
+      <!-- 表单内容 -->
+      <uni-forms-item name="receiver" class="form-item">
+>>>>>>> 3341989 (first sku add)
         <text class="label">收货人</text>
         <input
           class="input"
           placeholder="请填写收货人姓名"
           v-model="form.receiver"
         />
+<<<<<<< HEAD
       </view>
       <view class="form-item">
+=======
+      </uni-forms-item>
+
+      <uni-forms-item name="contact" class="form-item">
+>>>>>>> 3341989 (first sku add)
         <text class="label">手机号码</text>
         <input
           class="input"
           placeholder="请填写收货人手机号码"
           v-model="form.contact"
         />
+<<<<<<< HEAD
       </view>
       <view class="form-item">
+=======
+      </uni-forms-item>
+
+      <uni-forms-item name="fullLocation" class="form-item">
+>>>>>>> 3341989 (first sku add)
         <text class="label">所在地区</text>
         <picker
           @change="onRegionChange"
@@ -85,16 +203,28 @@ const onSubmit = async () => {
           <view v-if="form.fullLocation">{{ form.fullLocation }}</view>
           <view v-else class="placeholder">请选择省/市/区(县)</view>
         </picker>
+<<<<<<< HEAD
       </view>
       <view class="form-item">
+=======
+      </uni-forms-item>
+
+      <uni-forms-item name="address" class="form-item">
+>>>>>>> 3341989 (first sku add)
         <text class="label">详细地址</text>
         <input
           class="input"
           placeholder="街道、楼牌号等信息"
           v-model="form.address"
         />
+<<<<<<< HEAD
       </view>
       <view class="form-item">
+=======
+      </uni-forms-item>
+
+      <uni-forms-item class="form-item">
+>>>>>>> 3341989 (first sku add)
         <label class="label">设为默认地址</label>
         <switch
           @change="onSwitchChange"
@@ -102,8 +232,13 @@ const onSubmit = async () => {
           color="#27ba9b"
           :checked="form.isDefault === 1"
         />
+<<<<<<< HEAD
       </view>
     </form>
+=======
+      </uni-forms-item>
+    </uni-forms>
+>>>>>>> 3341989 (first sku add)
   </view>
   <!-- 提交按钮 -->
   <button @tap="onSubmit" class="button">保存并使用</button>

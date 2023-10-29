@@ -14,23 +14,33 @@ const onGetphonenumber: UniHelper.ButtonOnGetphonenumber = async (ev) => {
   // 利用感叹号❕ 进行非空断言
   const encryptedData = ev.detail!.encryptedData!;
   const iv = ev.detail!.iv!;
+<<<<<<< HEAD
 
   // console.log(ev.detail);
 
   const res = await postLoginWxMinAPI({
+=======
+  await postLoginWxMinAPI({
+>>>>>>> 3341989 (first sku add)
     code,
     encryptedData,
     iv,
   });
+<<<<<<< HEAD
 
   console.log(res);
+=======
+>>>>>>> 3341989 (first sku add)
 };
 
 // 模拟手机号码快捷登录 (开发练习)
 const onGetphonenumberSimple = async () => {
   const res = await postLoginWxMinSimpleAPI("13123456789");
+<<<<<<< HEAD
   console.log(res);
 
+=======
+>>>>>>> 3341989 (first sku add)
   // 保存会员信息
   const memberStore = useMemberStore();
   memberStore.setProfile(res.result);

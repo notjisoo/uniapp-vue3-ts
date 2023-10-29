@@ -1,5 +1,12 @@
 <script setup lang="ts">
+<<<<<<< HEAD
 import { getMemberAddressAPI } from "@/services/address";
+=======
+import {
+  deleteMemberAddressByIdAPI,
+  getMemberAddressAPI,
+} from "@/services/address";
+>>>>>>> 3341989 (first sku add)
 import type { AddressItem } from "@/types/address";
 import { onShow } from "@dcloudio/uni-app";
 import { ref } from "vue";
@@ -11,11 +18,36 @@ const getMemberAddressData = async () => {
   addressList.value = res.result;
 };
 
+<<<<<<< HEAD
 // 初始化调用
 // 这要用onShow，不可以使用onMounted或者是onLoad,每当页面展示的时候就调用
 onShow(() => {
   console.log("obj");
 
+=======
+// 删除收货地址
+const onDeleteAddress = (id: string) => {
+  // 二次确认
+  uni.showModal({
+    content: "删除地址",
+    success: async (res) => {
+      if (res.confirm) {
+        // 根据id删除地址
+        await deleteMemberAddressByIdAPI(id);
+        uni.showToast({
+          icon: "success",
+          title: "删除地址成功",
+        });
+        getMemberAddressData();
+      }
+    },
+  });
+};
+
+// 初始化调用
+// 这要用onShow，不可以使用onMounted或者是onLoad,每当页面展示的时候就调用
+onShow(() => {
+>>>>>>> 3341989 (first sku add)
   getMemberAddressData();
 });
 </script>
@@ -24,10 +56,21 @@ onShow(() => {
   <view class="viewport">
     <!-- 地址列表 -->
     <scroll-view class="scroll-view" scroll-y>
+<<<<<<< HEAD
       <view v-if="true" class="address">
         <view class="address-list">
           <!-- 收货地址项 -->
           <view class="item" v-for="item in addressList" :key="item.id">
+=======
+      <view v-if="addressList.length" class="address">
+        <uni-swipe-action class="address-list">
+          <!-- 收货地址项 -->
+          <uni-swipe-action-item
+            class="item"
+            v-for="item in addressList"
+            :key="item.id"
+          >
+>>>>>>> 3341989 (first sku add)
             <view class="item-content">
               <view class="user">
                 {{ item.receiver }}
@@ -45,9 +88,22 @@ onShow(() => {
                 修改
               </navigator>
             </view>
+<<<<<<< HEAD
           </view>
         </view>
       </view>
+=======
+            <!-- 右侧插槽 -->
+            <template #right>
+              <button @tap="onDeleteAddress(item.id)" class="delete-button">
+                删除
+              </button>
+            </template>
+          </uni-swipe-action-item>
+        </uni-swipe-action>
+      </view>
+
+>>>>>>> 3341989 (first sku add)
       <view v-else class="blank">暂无收货地址</view>
     </scroll-view>
     <!-- 添加按钮 -->

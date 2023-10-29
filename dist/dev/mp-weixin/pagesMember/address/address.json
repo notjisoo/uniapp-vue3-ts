@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "地址管理",
+  "usingComponents": {
+    "uni-swipe-action-item": "../../node-modules/@dcloudio/uni-ui/lib/uni-swipe-action-item/uni-swipe-action-item",
+    "uni-swipe-action": "../../node-modules/@dcloudio/uni-ui/lib/uni-swipe-action/uni-swipe-action"
+  }
+}

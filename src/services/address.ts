@@ -26,3 +26,46 @@ export const getMemberAddressAPI = () => {
     url: "/member/address",
   });
 };
+<<<<<<< HEAD
+=======
+
+/**
+ * 收货地址详情
+ * GET/member/address/${id}
+ * @param id 地址id，路径参数拼接
+ * @returns
+ */
+export const getMemberAddressByIdAPI = (id: string) => {
+  console.log(id);
+  return http<AddressItem>({
+    method: "GET",
+    url: `/member/address/${id}`,
+  });
+};
+
+/**
+ * 修改收货地址
+ * PUT/member/address/${id}
+ * @param id 地址的ID
+ * @param data 表单的数据，请求体参数
+ * @returns
+ */
+export const putMemberAddressByIdAPI = (id: string, data: AddressParams) => {
+  return http({
+    method: "PUT",
+    url: `/member/address/${id}`,
+    data,
+  });
+};
+
+/**
+ * @param id 地址ID
+ * @returns
+ */
+export const deleteMemberAddressByIdAPI = (id: string) => {
+  return http({
+    method: "DELETE",
+    url: `/member/address/${id}`,
+  });
+};
+>>>>>>> 3341989 (first sku add)

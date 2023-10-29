@@ -1,0 +1,1 @@
+<view class="navbar" style="{{'padding-top:' + b}}"><view class="logo"><image class="logo-image" src="{{a}}"/><text class="logo-text">新鲜 亲民 快捷</text></view><view class="search"><text class="icon-search">搜索商品</text><text class="icon-scan"></text></view></view>

@@ -76,7 +76,11 @@ const { guessRef, onScrolltolower } = useGuessList(); // 组合式API
         url="/pagesMember/settings/settings"
         hover-class="none"
       >
+<<<<<<< HEAD
         设置
+=======
+        设置大大大
+>>>>>>> 3341989 (first sku add)
       </navigator>
     </view>
 
