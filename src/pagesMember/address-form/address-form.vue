@@ -191,7 +191,6 @@ onLoad(() => {
   </view>
   <!-- 提交按钮 -->
   <button @tap="onSubmit" class="button">保存并使用</button>
-  {{ form }}
 </template>
 
 <style lang="scss">

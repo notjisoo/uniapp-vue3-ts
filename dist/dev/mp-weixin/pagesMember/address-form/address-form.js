@@ -159,8 +159,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           rules,
           model: form.value
         }),
-        s: common_vendor.o(onSubmit),
-        t: common_vendor.t(form.value)
+        s: common_vendor.o(onSubmit)
       });
     };
   }
