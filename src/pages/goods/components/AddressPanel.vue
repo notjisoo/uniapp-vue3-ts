@@ -1,8 +1,30 @@
 <script setup lang="ts">
+import { getMemberAddressAPI } from "@/services/address";
+import type { AddressItem } from "@/types/address";
+import { onShow } from "@dcloudio/uni-app";
+import { ref } from "vue";
+
 // 子调父
 const emit = defineEmits<{
   (event: "close"): void;
 }>();
+
+const addressList = ref<AddressItem[]>([]);
+const getMemberAddressData = async () => {
+  const res = await getMemberAddressAPI();
+  addressList.value = res.result;
+  console.log(res.result);
+};
+
+getMemberAddressData();
+onShow(() => {
+  getMemberAddressData();
+});
+
+// 选择收货地址
+const SelectAddress = (item: AddressItem) => {
+  console.log(item);
+};
 </script>
 
 <template>
@@ -13,25 +35,23 @@ const emit = defineEmits<{
     <view class="title">配送至</view>
     <!-- 内容 -->
     <view class="content">
-      <view class="item">
-        <view class="user">李明 13824686868</view>
-        <view class="address">北京市顺义区后沙峪地区安平北街6号院</view>
-        <text class="icon icon-checked"></text>
-      </view>
-      <view class="item">
-        <view class="user">王东 13824686868</view>
-        <view class="address">北京市顺义区后沙峪地区安平北街6号院</view>
-        <text class="icon icon-ring"></text>
-      </view>
-      <view class="item">
-        <view class="user">张三 13824686868</view>
-        <view class="address">北京市朝阳区孙河安平北街6号院</view>
-        <text class="icon icon-ring"></text>
+      <view
+        class="item"
+        @tap="SelectAddress(item)"
+        v-for="item in addressList"
+        :key="item.id"
+      >
+        <view class="user">{{ item.receiver }} {{ item.contact }}</view>
+        <view class="address">{{ item.fullLocation }}</view>
+        <text class="icon" :class="item.isDefault ? 'icon-checked' : ''"></text>
       </view>
     </view>
+
     <view class="footer">
-      <view class="button primary"> 新建地址 </view>
-      <view v-if="false" class="button primary">确定</view>
+      <navigator url="/pagesMember/address/address" class="button primary">
+        新建地址
+      </navigator>
+      <view v-if="true" class="button primary">确定</view>
     </view>
   </view>
 </template>

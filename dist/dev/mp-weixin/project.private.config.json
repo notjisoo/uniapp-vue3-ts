@@ -9,6 +9,13 @@
       "list": [
         {
           "name": "",
+          "pathName": "pagesOrder/detail/detail",
+          "query": "id=1719701242990563329",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pagesOrder/create/create",
           "query": "",
           "launchMode": "default",

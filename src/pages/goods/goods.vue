@@ -84,7 +84,6 @@ const onTapImage = (url: string) => {
 
 onLoad(() => {
   getGoodsData(query.id);
-  console.log("");
 });
 
 // 是否显示SKU组件
@@ -111,8 +110,11 @@ const skuPopupRef = ref<SkuPopupInstance>();
 
 // 计算被选中的值
 const selectArrText = computed(() => {
+  console.log(skuPopupRef.value?.selectArr);
   return skuPopupRef.value?.selectArr?.join(" ").trim() || "请选择商品规格";
 });
+
+// 计算地址
 
 // 加入购物车的事件
 const onAddCart = async (e: SkuPopupEvent) => {
@@ -121,6 +123,13 @@ const onAddCart = async (e: SkuPopupEvent) => {
     title: "添加成功",
   });
   isShowSku.value = false;
+};
+
+// 立即购买事件
+const onBuyNow = (e: SkuPopupEvent) => {
+  uni.navigateTo({
+    url: `/pagesOrder/create/create?skuId=${e._id}&count=${e.buy_num}`,
+  });
 };
 </script>
 
@@ -139,6 +148,7 @@ const onAddCart = async (e: SkuPopupEvent) => {
       backgroundColor: '#E9F8F5',
     }"
     @add-cart="onAddCart"
+    @buy-now="onBuyNow"
   />
 
   <scroll-view scroll-y class="viewport">

@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { getMemberOrderPreAPI } from "@/services/order";
+import {
+  getMemberOrderPreAPI,
+  getMemberOrderPreNowAPI,
+  postMemberOrderAPI,
+} from "@/services/order";
 import { useAddressStore } from "@/stores/modules/address";
 import type { OrderPreResult } from "@/types/order";
 import { onLoad } from "@dcloudio/uni-app";
@@ -24,24 +28,58 @@ const onChangeDelivery: UniHelper.SelectorPickerOnChange = (ev) => {
   activeIndex.value = ev.detail.value;
 };
 
+const query = defineProps<{ skuId?: string; count?: string }>();
+
 // 获取订单信息
 const orderPre = ref<OrderPreResult>();
 const getMemberOrderPreData = async () => {
-  const res = await getMemberOrderPreAPI();
-  orderPre.value = res.result;
+  if (query.count && query.skuId) {
+    const res = await getMemberOrderPreNowAPI({
+      skuId: query.skuId,
+      count: query.count,
+    });
+    orderPre.value = res.result;
+  } else {
+    const res = await getMemberOrderPreAPI();
+    orderPre.value = res.result;
+  }
 };
-
-onLoad(() => {
-  getMemberOrderPreData();
-});
 
 const addressStore = useAddressStore();
 // 收货地址
 const selectAddress = computed(() => {
+  // 如果有值就用选中的，如果没有就用default的值
   return (
     addressStore.selectedAddress ||
     orderPre.value?.userAddresses.find((v) => v.isDefault)
   );
+});
+
+// 提交订单
+const onOrderSubmit = async () => {
+  if (!selectAddress.value?.id) {
+    return uni.showToast({
+      icon: "none",
+      title: "请选择收货地址!",
+    });
+  }
+  const res = await postMemberOrderAPI({
+    addressId: selectAddress.value!.id,
+    buyerMessage: buyerMessage.value,
+    deliveryTimeType: activeDelivery.value.type,
+    goods: orderPre.value!.goods.map((v) => ({
+      count: v.count,
+      skuId: v.skuId,
+    })),
+    payChannel: 2,
+    payType: 1,
+  });
+  // 提交了订单之后要关闭当前页面,再去跳转，这个是重定向的意思
+  uni.navigateTo({ url: `/pagesOrder/detail/detail?id=${res.result.id}` });
+};
+
+onLoad(() => {
+  getMemberOrderPreData();
 });
 </script>
 
@@ -143,7 +181,13 @@ const selectAddress = computed(() => {
     <view class="total-pay symbol">
       <text class="number">{{ orderPre?.summary.totalPrice }}</text>
     </view>
-    <view class="button" :class="{ disabled: true }"> 提交订单 </view>
+    <view
+      class="button"
+      @tap="onOrderSubmit"
+      :class="{ disabled: !selectAddress?.id }"
+    >
+      提交订单
+    </view>
   </view>
 </template>
 

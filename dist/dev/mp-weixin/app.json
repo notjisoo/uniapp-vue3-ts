@@ -22,7 +22,8 @@
     {
       "root": "pagesOrder",
       "pages": [
-        "create/create"
+        "create/create",
+        "detail/detail"
       ]
     }
   ],
