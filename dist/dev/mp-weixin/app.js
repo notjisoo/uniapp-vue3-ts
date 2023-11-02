@@ -18,6 +18,8 @@ if (!Math) {
   "./pagesMember/address-form/address-form.js";
   "./pagesOrder/create/create.js";
   "./pagesOrder/detail/detail.js";
+  "./pagesOrder/payment/payment.js";
+  "./pagesOrder/list/list.js";
 }
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "App",

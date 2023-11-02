@@ -23,7 +23,9 @@
       "root": "pagesOrder",
       "pages": [
         "create/create",
-        "detail/detail"
+        "detail/detail",
+        "payment/payment",
+        "list/list"
       ]
     }
   ],
