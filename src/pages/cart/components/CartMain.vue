@@ -446,7 +446,9 @@ onShow(() => {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: var(--window-bottom);
+  bottom: var(
+    --window-bottom
+  ); // --window-bottom	内容区域距离底部的距离 TabBar 的高度
   z-index: 1;
   height: 100rpx;
   padding: 0 20rpx;

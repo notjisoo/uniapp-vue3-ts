@@ -287,6 +287,12 @@ const onBuyNow = (e: SkuPopupEvent) => {
 </template>
 
 <style lang="scss">
+// 指定条件编译
+/* #ifdef APP-PLUS || H5 */
+.toolbar .icons .navigator-wrap {
+  flex: 1;
+}
+/* #endif */
 page {
   height: 100%;
   overflow: hidden;

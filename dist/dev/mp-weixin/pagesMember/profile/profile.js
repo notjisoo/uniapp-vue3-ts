@@ -15,6 +15,30 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       console.log(res);
     };
     const memberStore = stores_modules_member.useMemberStore();
+    const uploadFile = (tempFilePath) => {
+      common_vendor.index.uploadFile({
+        url: "/member/profile/avatar",
+        name: "file",
+        filePath: tempFilePath,
+        success: (res) => {
+          if (res.statusCode === 200) {
+            const avatar = JSON.parse(res.data).result.avatar;
+            profile.value.avatar = avatar;
+            memberStore.profile.avatar = avatar;
+            common_vendor.index.showToast({
+              icon: "success",
+              title: "上传头像成功"
+            });
+          } else {
+            common_vendor.index.showToast({
+              title: "netWork find out problem, so Try again later pls",
+              icon: "success",
+              mask: true
+            });
+          }
+        }
+      });
+    };
     const onAvatarChange = () => {
       common_vendor.index.chooseMedia({
         count: 1,
@@ -23,28 +47,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         // 文件类型
         success: (res) => {
           const { tempFilePath } = res.tempFiles[0];
-          common_vendor.index.uploadFile({
-            url: "/member/profile/avatar",
-            name: "file",
-            filePath: tempFilePath,
-            success: (res2) => {
-              if (res2.statusCode === 200) {
-                const avatar = JSON.parse(res2.data).result.avatar;
-                profile.value.avatar = avatar;
-                memberStore.profile.avatar = avatar;
-                common_vendor.index.showToast({
-                  icon: "success",
-                  title: "上传头像成功"
-                });
-              } else {
-                common_vendor.index.showToast({
-                  title: "netWork find out problem, so Try again later pls",
-                  icon: "success",
-                  mask: true
-                });
-              }
-            }
-          });
+          uploadFile(tempFilePath);
         }
       });
     };

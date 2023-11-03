@@ -18,40 +18,57 @@ const getMemberProfileData = async () => {
 
 const memberStore = useMemberStore();
 
+// 文件上传的封装
+const uploadFile = (tempFilePath: string) => {
+  uni.uploadFile({
+    url: "/member/profile/avatar",
+    name: "file",
+    filePath: tempFilePath,
+    success: (res) => {
+      if (res.statusCode === 200) {
+        const avatar = JSON.parse(res.data).result.avatar;
+        // 个人信息页数据更新
+        profile.value!.avatar = avatar;
+        // 更新store中的头像
+        memberStore.profile!.avatar = avatar;
+        uni.showToast({
+          icon: "success",
+          title: "上传头像成功",
+        });
+      } else {
+        uni.showToast({
+          title: "netWork find out problem, so Try again later pls",
+          icon: "success",
+          mask: true,
+        });
+      }
+    },
+  });
+};
+
 // 修改头像
 const onAvatarChange = () => {
   // 调用拍照或者选择图片的API
+  // #ifdef MP-WEIXIN
   uni.chooseMedia({
     count: 1, // 文件个数
     mediaType: ["image"], // 文件类型
     success: (res) => {
       const { tempFilePath } = res.tempFiles[0];
-      uni.uploadFile({
-        url: "/member/profile/avatar",
-        name: "file",
-        filePath: tempFilePath,
-        success: (res) => {
-          if (res.statusCode === 200) {
-            const avatar = JSON.parse(res.data).result.avatar;
-            // 个人信息页数据更新
-            profile.value!.avatar = avatar;
-            // 更新store中的头像
-            memberStore.profile!.avatar = avatar;
-            uni.showToast({
-              icon: "success",
-              title: "上传头像成功",
-            });
-          } else {
-            uni.showToast({
-              title: "netWork find out problem, so Try again later pls",
-              icon: "success",
-              mask: true,
-            });
-          }
-        },
-      });
+      uploadFile(tempFilePath);
     },
   });
+  // #endif
+
+  // #ifdef APP-PLUS || H5
+  uni.chooseImage({
+    count: 1,
+    success: (res) => {
+      const tempFilePath = res.tempFilePaths[0];
+      uploadFile(tempFilePath);
+    },
+  });
+  // #endif
 };
 
 // 点击保存提交表单
